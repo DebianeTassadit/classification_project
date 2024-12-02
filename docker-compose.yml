@@ -1,7 +1,7 @@
 
 services:
   interactive-service:
-    image: model_pipeline # Remplacez par le nom de votre image Docker
+    image: mayq16/model_pipeline 
     container_name: interactive_container  # Nom du conteneur
     ports:
       - "8888:80"  # Exposition des ports : hôte:conteneur
