@@ -60,18 +60,23 @@ Ce projet est une simulation de projet d'entreprise dans laquelle nous collaboro
 
 ### Construire les images Docker
 ```bash
-docker-compose build
+docker-compose up -d 
 ```
+Cette commande démarre tous les services nécessaires définis dans le fichier docker-compose.yml en arrière-plan. Cela prépare l'environnement pour exécuter les scripts d'entraînement et de prédiction de manière fluide et isolée.
 
-### Exécuter le script d'entraînement
+ ### Exécuter le service interactif pour l'entraînement
 ```bash
-docker-compose run training
+docker-compose run interactive-service
 ```
+Cette commande lance un service interactif qui permet à l'utilisateur de choisir un modèle d'entraînement parmi trois options disponibles :
 
-### Exécuter le script de prédiction
-```bash
-docker-compose run prediction
-```
+1- Random Forest
+2 - SVM
+3 - Régression Logistique
+<img width="615" alt="1 (1)" src="https://github.com/user-attachments/assets/15e4cc51-43bb-46c2-bc4f-e54b26eac762">
+
+
+
 
 ---
 
