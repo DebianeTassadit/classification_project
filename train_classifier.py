@@ -6,8 +6,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
 import joblib
 
 # Chemins pour l'exportation des fichiers
@@ -42,19 +40,7 @@ def split_data(data, target):
     X_test, X_val, y_test, y_val = train_test_split(X_temp, y_temp, test_size=0.33, random_state=42)
     return X_train, X_test, X_val, y_train, y_test, y_val
 
-# Étape 3 : Réduction de dimensions avec PCA
-def apply_pca(X_train, X_test, X_val, n_components=2):
-    """
-    Réduit les dimensions des données à 2 dimensions pour la visualisation.
-    """
-    print(f"Réduction des dimensions à {n_components} avec PCA...")
-    pca = PCA(n_components=n_components)
-    X_train_pca = pca.fit_transform(X_train)
-    X_test_pca = pca.transform(X_test)
-    X_val_pca = pca.transform(X_val)
-    return X_train_pca, X_test_pca, X_val_pca, pca
-
-# Étape 4 : Entraînement avec cross-validation
+# Étape 3 : Entraînement avec cross-validation
 def cross_validate_model(X_train, y_train, model):
     """
     Effectue une cross-validation sur les données d'entraînement et retourne la moyenne des scores.
@@ -65,7 +51,7 @@ def cross_validate_model(X_train, y_train, model):
     print(f"Accuracy moyenne : {scores.mean():.2f}")
     return model
 
-# Étape 5 : Entraînement du modèle
+# Étape 4 : Entraînement du modèle
 def train_model(X_train, y_train, model_choice):
     """
     Entraîne un modèle choisi par l'utilisateur.
@@ -87,7 +73,7 @@ def train_model(X_train, y_train, model_choice):
     model.fit(X_train, y_train)
     return model
 
-# Étape 6 : Évaluation des performances
+# Étape 5 : Évaluation des performances
 def evaluate_model(model, X_test, y_test):
     """
     Évalue les performances du modèle sur les données de test.
@@ -98,45 +84,30 @@ def evaluate_model(model, X_test, y_test):
     print(classification_report(y_test, y_pred))
     print(f"Accuracy : {accuracy_score(y_test, y_pred):.2f}")
 
-# Étape 7 : Exportation des fichiers
+# Étape 6 : Exportation des fichiers
 def export_files(model, X_val, y_val):
     """
     Exporte le modèle entraîné et les données de validation.
     """
     print("Exportation du modèle et des données de validation...")
+
+    # Vérification que X_val et y_val ont la même taille
+    assert len(X_val) == len(y_val), "La taille de X_val et y_val ne correspond pas. Vérifiez la division des données."
+
+    # Alignement explicite entre X_val et y_val
+    y_val = y_val.reset_index(drop=True)
+    X_val = X_val.reset_index(drop=True)
+
+    # Ajout de la colonne Target
+    val_data = X_val.copy()
+    val_data["Target"] = y_val
+
+    # Sauvegarde
     joblib.dump(model, MODEL_PATH)
-    val_data = pd.DataFrame(X_val, columns=["PC1", "PC2"])
-    val_data["Target"] = y_val.reset_index(drop=True)
     val_data.to_csv(VALIDATION_DATA_PATH, index=False)
+
     print(f"Modèle sauvegardé dans {MODEL_PATH}")
     print(f"Données de validation sauvegardées dans {VALIDATION_DATA_PATH}")
-
-# Étape 8 : Visualisation avec frontière de décision
-def plot_decision_boundary(model, X, y, title="Frontière de décision"):
-    """
-    Visualise les données et la frontière de décision pour un modèle entraîné.
-    """
-    # Création d'une grille pour tracer les frontières
-    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01),
-                         np.arange(y_min, y_max, 0.01))
-    
-    # Prédiction sur chaque point de la grille
-    Z = model.predict(np.c_[xx.ravel(), yy.ravel()])
-    Z = Z.reshape(xx.shape)
-
-    # Tracer la frontière de décision
-    plt.figure(figsize=(10, 6))
-    plt.contourf(xx, yy, Z, alpha=0.8, cmap="viridis")
-
-    # Tracer les points de données
-    scatter = plt.scatter(X[:, 0], X[:, 1], c=y, edgecolor='k', cmap="viridis")
-    plt.title(title)
-    plt.xlabel("Composante principale 1")
-    plt.ylabel("Composante principale 2")
-    plt.colorbar(scatter, label="Classes")
-    plt.show()
 
 # Main
 if __name__ == "__main__":
@@ -169,9 +140,6 @@ if __name__ == "__main__":
     # Division des données
     X_train, X_test, X_val, y_train, y_test, y_val = split_data(X, y)
 
-    # Réduction des dimensions (facultatif pour visualisation)
-    #X_train, X_test, X_val, pca = apply_pca(X_train, X_test, X_val)
-
     # Entraînement du modèle
     model = train_model(X_train, y_train, model_choice)
 
@@ -180,9 +148,5 @@ if __name__ == "__main__":
 
     # Exportation du modèle et des données de validation
     export_files(model, X_val, y_val)
-
-    # Visualisation avec la frontière de décision
-    print("Visualisation avec la frontière de décision...[optionel] => enlever les commentaires du code")
-    #plot_decision_boundary(model, X_train, y_train, title=f"Frontière de décision {model_choice} (train)")
 
     print("Pipeline terminé avec succès.")
