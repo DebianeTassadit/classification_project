@@ -30,7 +30,7 @@ Ce projet est une simulation de projet d'entreprise dans laquelle plusieurs dév
 
 ### Génération des Données :
 - Utilisation de `make_classification` de scikit-learn pour créer des données synthétiques.
-- Paramètres ajustables comme `n_informative`, `n_classes`, `class_sep`.
+- Paramètres ajustables comme `n_informative`, `n_classes`, `class_sep`. `n_clusters_per_class`
 
 ### Entraînement des Modèles :
 - Implémentation de plusieurs algorithmes de classification :
