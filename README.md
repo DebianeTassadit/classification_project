@@ -37,7 +37,7 @@ Ce projet est une simulation de projet d'entreprise dans laquelle plusieurs dév
   - Random Forest
   - SVM
   - Régression Logistique
-- Validation croisée pour évaluer les performances sur des données d'entraînement.
+- Cross validation pour évaluer les performances sur des données d'entraînement.
 
 ### Évaluation des Modèles :
 - Calcul des métriques : précision, rappel, F1-score et rapport de classification.
@@ -81,7 +81,7 @@ docker-compose run prediction
 Vous avez aussi le choix de prendre d'autres modèles
 
 #### Modèle : Logistic Regression
-- **Scores de validation croisée** : `[0.9921, 0.9914, 0.9928, 0.9928, 0.9921]`
+- **Scores de Cross Validation** : `[0.9921, 0.9914, 0.9928, 0.9928, 0.9921]`
   - Ces résultats montrent une stabilité et une cohérence élevées des performances sur les différents splits des données.
 - **Précision globale sur les données de test** : `99%`
   - Cela signifie que le modèle a correctement classifié 99% des échantillons de test.
