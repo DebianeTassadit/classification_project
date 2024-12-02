@@ -73,9 +73,8 @@ Cette commande lance un service interactif qui permet à l'utilisateur de choisi
 1- Random Forest
 2 - SVM
 3 - Régression Logistique
+
 <img width="615" alt="1 (1)" src="https://github.com/user-attachments/assets/15e4cc51-43bb-46c2-bc4f-e54b26eac762">
-
-
 
 
 ---
