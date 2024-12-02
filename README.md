@@ -58,7 +58,7 @@ Ce projet est une simulation de projet d'entreprise dans laquelle nous collaboro
 
 ## Instructions
 
-### Construire les images Docker
+### Démarrer les services Docker
 ```bash
 docker-compose up -d 
 ```
@@ -76,6 +76,10 @@ Cette commande lance un service interactif qui permet à l'utilisateur de choisi
 
 <img width="615" alt="1 (1)" src="https://github.com/user-attachments/assets/15e4cc51-43bb-46c2-bc4f-e54b26eac762">
 
+Une fois l'entraînement terminé, les résultats détaillés sont affichés pour évaluer la performance du modèle sélectionné.
+
+
+<img width="461" alt="11 (1)" src="https://github.com/user-attachments/assets/77a199cb-a1fd-4054-a296-992f5b4d621a">
 
 ---
 
