@@ -1,0 +1,14 @@
+
+services:
+  interactive-service:
+    image: mayq16/model_pipeline 
+    container_name: interactive_container  # Nom du conteneur
+    ports:
+      - "8888:80"  # Exposition des ports : hôte:conteneur
+    volumes:
+      - ./data:/app/data  # Volume pour persister les données
+    stdin_open: true       # Permet un terminal interactif
+    tty: true              # Active un terminal pseudo-TTY
+    environment:
+      - ENV_VAR1=value1    # Variables d'environnement
+      - ENV_VAR2=value2
