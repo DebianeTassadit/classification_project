@@ -2,7 +2,7 @@
 
 ## Description
 
-Ce projet est une simulation de projet d'entreprise dans laquelle plusieurs développeurs collaborent pour créer une solution complète de génération de données synthétiques, d'entraînement et d'évaluation de modèles de classification. Il inclut également l'intégration des scripts dans un conteneur Docker pour faciliter l'exécution et le déploiement.
+Ce projet est une simulation de projet d'entreprise dans laquelle nous collaborons pour créer une solution complète de génération de données synthétiques, d'entraînement et d'évaluation de modèles de classification. Il inclut également l'intégration des scripts dans un conteneur Docker pour faciliter l'exécution et le déploiement.
 
 ---
 
@@ -10,14 +10,14 @@ Ce projet est une simulation de projet d'entreprise dans laquelle plusieurs dév
 
 - Générer des données synthétiques et entraîner différents modèles de classification (`Random Forest`, `SVM`, `Logistic Regression`).
 - Évaluer les performances des modèles sur des données de test et de validation.
-- Intégrer les fonctionnalités développées dans un pipeline complet.
+- Intégrer les fonctionnalités développées dans un pipeline complet (au niveau de Github et Docker).
 - Dockeriser le projet pour simplifier son exécution et son déploiement.
 
 ---
 
 ## Structure du Projet
-
-- **`train_classifier.py`** : Script pour générer des données, entraîner les modèles, et exporter le modèle final ainsi que les données de validation.
+- **`Data_Generate`** : Notebook pour analyser et visualiser diverses données tout en explorant les variations des paramètres.
+- **`train_classifier.py`** : Script pour générer des données a partir des  paramètres sélectionnés du notebook, entraîner les modèles, et exporter le modèle final ainsi que les données de validation.
 - **`predict_classification.py`** : Script pour importer le modèle et les données de validation, effectuer des prédictions, et évaluer les performances finales.
 - **`requirements.txt`** : Liste des dépendances Python nécessaires pour exécuter le projet.
 - **Docker Integration** :
